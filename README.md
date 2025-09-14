@@ -1,5 +1,5 @@
 <div align="center"><img src="https://github.com/gavinr/github-csv-tools/blob/master/banner.jpg?raw=true" alt="GitHub CSV Tools banner" title="GitHub CSV Tools" />
-<h3 align="center">Import and export GitHub issues via CSV</h3>
+<h3 align="center">CSV形式でGitHubイシューのインポート・エクスポートツール</h3>
 </div>
 
 <p align="center">
@@ -18,77 +18,77 @@
   </a>
 </p>
 
-## Usage
+## 使用方法
 
-Prerequisite: [Install Node.js](https://nodejs.org/en/), then run this to install:
+前提条件: [Node.jsをインストール](https://nodejs.org/en/)して、以下のコマンドでインストールしてください：
 
 ```bash
 npm install -g github-csv-tools
 ```
 
-After install, `githubCsvTools --help` for info on how to use, or see below.
+インストール後、`githubCsvTools --help` で使用方法を確認するか、以下を参照してください。
 
-Instructions for exporting or importing:
+エクスポート・インポートの手順：
 
-### To Import Issues
+### イシューのインポート
 
-Currently imports title, body, labels, status (closed or open) and milestones. See the [test](/test) folder for example input formats.
+現在、タイトル、本文、ラベル、ステータス（クローズ済み・オープン）、マイルストーンをインポートできます。入力形式の例については[test](/test)フォルダを参照してください。
 
 ```bash
 githubCsvTools myFile.csv
 ```
 
-### To Export Issues
+### イシューのエクスポート
 
 ```bash
 githubCsvTools
 ```
 
-| Option                 | Default                                                                                               | Notes                                                                                                                                                                                                         |
-| ---------------------- | ----------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| -f, --exportFileName   | YYYY-MM-DD-hh-mm-ss-issues.csv                                                                        | The name of the CSV you'd like to export to.                                                                                                                                                                  |
-| -a, --exportAttributes | number, title, labels, state, assignees, milestone, comments, created_at, updated_at, closed_at, body | Comma-separated list of attributes (columns) in the export**.                                                                                                                                                 |
-| -c, --exportComments   | n/a                                                                                                   | Include comments in the export. If using in combination with `--exportAttributes`, `id` must be included.                                                                                                     |
-| -e, --exportAll        | n/a                                                                                                   | Export all possible values from the GitHub API. If not included, a subset of attributes (see `--exportAttributes` above) that are known to be compatible with GitHub *import* will be included in the export. |
+| オプション             | デフォルト値                                                                   | 備考                                                                                                                                                                                                          |
+| ---------------------- | ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| -f, --exportFileName   | YYYY-MM-DD-hh-mm-ss-issues.csv                                                | エクスポートするCSVファイル名                                                                                                                                                                                 |
+| -a, --exportAttributes | number, title, labels, state, assignees, milestone, comments, created_at, updated_at, closed_at, body | エクスポートする属性（列）のカンマ区切りリスト**                                                                                                                                                                 |
+| -c, --exportComments   | なし                                                                           | エクスポートにコメントを含める。`--exportAttributes`と組み合わせて使用する場合、`id`を含める必要があります                                                                                                     |
+| -e, --exportAll        | なし                                                                           | GitHub APIから取得可能なすべての値をエクスポート。含めない場合、GitHubの*インポート*と互換性があることが確認済みの属性のサブセット（上記の`--exportAttributes`を参照）がエクスポートに含まれます |
 
-** List of all possible options for `exportAttributes` includes every option in the [GitHub API Export](https://developer.github.com/v3/issues/#response-4). Values in child objects can be referenced using a "dot" - for example, a user's `avatar_url` can be accessed via `user.avatar_url`.
+** `exportAttributes`の利用可能なオプションのリストには、[GitHub API Export](https://developer.github.com/v3/issues/#response-4)のすべてのオプションが含まれます。子オブジェクトの値は「ドット」を使用して参照できます - たとえば、ユーザーの`avatar_url`は`user.avatar_url`でアクセスできます。
 
-### Tokens
+### トークン
 
-For all actions, the tool will ask you to input a GitHub token. To obtain this token:
+すべての操作において、ツールはGitHubトークンの入力を求めます。このトークンを取得するには：
 
-1. Go to <https://github.com/settings/tokens>
-2. Click "Generate New Token"
-3. Check on `repo`
-4. Copy/paste the token provided when the tool asks for it.
+1. <https://github.com/settings/tokens> にアクセス
+2. 「Generate New Token」をクリック
+3. `repo`にチェックを入れる
+4. ツールがトークンを求めた際に、提供されたトークンをコピー&ペーストする
 
-## Other Options
+## その他のオプション
 
-| Option                  | Notes                                                                         |
-| ----------------------- | ------------------------------------------------------------------------------|
-| -V, --version           | Output the version number                                                     |
-| -g, --github_enterprise | Your GitHub Enterprise URL. <https://your-internal-githubenterprise.com/api/v3>  <br />(Reminder: do not forget the  `/api/v3` at the end)|
-| -t, --token             | The GitHub token. <https://github.com/settings/tokens>                          |
-| -o, --organization      | The User or Organization slug that the repo lives under. <br />Example: For `/myOrg/my-repo`, this value would be **myOrg**.                    |
-| -r, --repository        | The repository name (slug).<br />Example: For `/myOrg/my-repo`, this value would be **my-repo**.                                                 |
-| --csvDelimiter          | The CSV delimiter character (defaults to ',')                                 |
-| -v, --verbose           | Include additional logging information.                                       |
-| -h, --help              | See all the options and help.                                                 |
+| オプション              | 備考                                                                          |
+| ----------------------- | -----------------------------------------------------------------------------|
+| -V, --version           | バージョン番号を出力                                                         |
+| -g, --github_enterprise | GitHub EnterpriseのURL。<https://your-internal-githubenterprise.com/api/v3>  <br />（注意：末尾の`/api/v3`を忘れないでください）|
+| -t, --token             | GitHubトークン。<https://github.com/settings/tokens>                          |
+| -o, --organization      | リポジトリが存在するユーザーまたは組織のスラッグ。<br />例：`/myOrg/my-repo`の場合、この値は**myOrg**になります                    |
+| -r, --repository        | リポジトリ名（スラッグ）<br />例：`/myOrg/my-repo`の場合、この値は**my-repo**になります                                                 |
+| --csvDelimiter          | CSV区切り文字（デフォルトは','）                                             |
+| -v, --verbose           | 追加のログ情報を含める                                                       |
+| -h, --help              | すべてのオプションとヘルプを表示                                             |
 
-## Development
+## 開発
 
-1. Clone the repo.
-2. Browse to repo, then run `npm install -g`
+1. リポジトリをクローンする
+2. リポジトリディレクトリに移動し、`npm install -g`を実行する
 
-## Changelog
+## 更新履歴
 
-See [CHANGELOG.md](https://github.com/gavinr/github-csv-tools/blob/master/CHANGELOG.md)
+[CHANGELOG.md](https://github.com/gavinr/github-csv-tools/blob/master/CHANGELOG.md)を参照
 
-## Hosted version [![hosted shield](https://img.shields.io/badge/hosted-repoio.com-orange)](https://repoio.com)
+## ホスト版 [![hosted shield](https://img.shields.io/badge/hosted-repoio.com-orange)](https://repoio.com)
 
-This software can be used without download/install by going to [repoio.com](https://repoio.com).
+このソフトウェアは[repoio.com](https://repoio.com)でダウンロード・インストール不要で使用できます。
 
-## Thanks
+## 謝辞
 
 - [octokit/rest.js](https://octokit.github.io/rest.js/)
 - [nodeCSV](https://www.npmjs.com/package/csv)
